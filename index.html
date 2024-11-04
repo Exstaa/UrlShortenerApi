@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+	<form onsubmit="shortUrl(event)">
+	<input placeholder="URL" id="url">
+	<button>Create Shorturl</button>
+	</form>
+	<script>
+	async function shortUrl(e){
+		e.preventDefault();
+		let url = document.getElementById("url").value;
+	    const response = await fetch("http://localhost:8080/api/v1/url/shorten", {method: "POST", headers: {'Content-Type': 'application/json'}, body: {'longUrl': url}});
+	    const url2 = await response.text();
+	    console.log(url2)
+	}
+	</script>
+</body>
+
+</html>
